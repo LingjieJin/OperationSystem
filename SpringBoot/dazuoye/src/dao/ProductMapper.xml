@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ProductMapper">
+	<!-- 查询所有商品 -->
+	<select id="selectAllProducts"  resultType="map">
+		select * from product_table
+	</select>
+	
+	<!-- 分页查询商品 -->
+	<select id="selectAllProductsByPage"  resultType="map">
+		select * from product_table limit #{startIndex}, #{perPageSize} 
+	</select>
+	
+	<!-- 添加商品 -->
+	<insert id="addProduct" parameterType="Product">
+		insert into product_table (name, price, discount_price, counts, picture)
+		 values (#{name}, #{price}, #{discount_price}, #{counts}, #{picture})
+	</insert>
+	
+	<!-- 修改商品 -->
+	<update id="updateProduct" parameterType="Product">
+		update product_table set
+			name = #{name},
+			price =  #{price},
+			discount_price = #{discount_price},
+			counts = #{counts},
+			picture = #{picture}
+		where id = #{id}
+	</update>
+	
+	<!-- 查询一个商品，修改及详情使用 -->
+	<select id="selectAProduct" parameterType="integer" resultType="ProductTable">
+		select * from product_table where id = #{id}
+	</select>
+	
+	<!-- 删除一个商品 -->
+	<delete id="deleteAProduct" parameterType="integer">
+		delete from product_table where id = #{id}
+	</delete>
+	
+	
+</mapper>

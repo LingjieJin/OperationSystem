@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ProductOrderMapper">
+	<!-- 查询所有商品 -->
+	<select id="selectAllProductsByOrder" parameterType="String" resultType="ProductOrder">
+		select * from product_order_table where order_id = #{order_id}
+	</select>
+	
+	
+	<!-- 添加商品 -->
+	<insert id="addProductOrder" parameterType="ProductOrder">
+		insert into product_order_table (id, product_name, order_id)
+		 values (null,#{product_name}, #{order_id})
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteAOrder" parameterType="String">
+		delete from product_order_table where order_id = #{order_id}
+	</delete>
+	
+</mapper>
